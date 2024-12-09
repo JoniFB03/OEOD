@@ -7,5 +7,14 @@ mplfinance
 backtesting
 gymnasium
 gym-anytrading
-talib
+scikit-learn
 plotly
+dash
+dash-bootstrap-components
+dash-core-components
+dash-html-components
+dash-renderer
+dash-table
+dash-daq
+dash-cytoscape
+dash-canvas
