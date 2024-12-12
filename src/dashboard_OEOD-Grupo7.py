@@ -10,6 +10,15 @@ import plotly.graph_objects as go
 ticker = "NVDA"
 start_date = "2019-01-01"
 end_date = "2024-11-01"
+imagem_url = "https://th.bing.com/th/id/R.952ab16c7380e16b9f269e04481fabfc?rik=AXlfeVuBYRP54w&pid=ImgRaw&r=0"
+cor_lettring = '#4EB82F'
+
+###################################################################################################################
+### imagem_url = "https://th.bing.com/th/id/R.952ab16c7380e16b9f269e04481fabfc?rik=AXlfeVuBYRP54w&pid=ImgRaw&r=0"
+### cor_lettring = '#4EB82F'
+### ticker = "NVDA"
+###################################################################################################################
+
 
 def get_data(ticker = "NVDA", start_date = "2019-01-01", end_date = "2024-11-01"):
     data = yf.download(ticker, start=start_date, end=end_date)
@@ -37,18 +46,18 @@ app.layout = html.Div(
         # Título e imagem lado a lado
         html.Div([
             html.Img(
-                src='https://th.bing.com/th/id/R.952ab16c7380e16b9f269e04481fabfc?rik=AXlfeVuBYRP54w&pid=ImgRaw&r=0',
+                src=f'{imagem_url}',
                 style={'height': '50px', 'width': 'auto', 'marginRight': '20px'}
             ),
             html.H1(
                 f"Dashboard da {ticker}",
-                style={'textAlign': 'center', 'fontFamily': 'Arial', 'color': '#4EB82F', 'display': 'inline-block'}
+                style={'textAlign': 'center', 'fontFamily': 'Arial', 'color': f'{cor_lettring}', 'display': 'inline-block'}
             )
         ], style={'display': 'flex', 'alignItems': 'center', 'justifyContent': 'center'}),
         
         html.Div(
             "Selecionar o tipo de gráfico:",
-            style={'marginTop': 20, 'fontFamily': 'Arial', 'fontSize': '22px', 'color': '#4EB82F'}
+            style={'marginTop': 20, 'fontFamily': 'Arial', 'fontSize': '22px', 'color': f'{cor_lettring}'}
         ),
         dcc.RadioItems(
             options=[
@@ -64,18 +73,18 @@ app.layout = html.Div(
             inline=True,
             style={
                 'fontFamily': 'Arial', 'fontSize': '16px', 
-                'backgroundColor': '#2a2a40', 'color': '#4EB82F',
+                'backgroundColor': '#2a2a40', 'color': f'{cor_lettring}',
                 'borderRadius': '5px', 'padding': '5px'
             },
-            inputStyle={'backgroundColor': '#4EB82F', 'borderRadius': '50%', 'width': '20px', 'height': '20px'},
+            inputStyle={'backgroundColor': f'{cor_lettring}', 'borderRadius': '50%', 'width': '20px', 'height': '20px'},
             labelStyle={'fontSize': '16px', 'fontFamily': 'Arial'}
         ),
         dcc.Graph(id='ohlc-graph'),
-        html.Hr(style={'borderColor': '#4EB82F'}),
-        html.H2("Tabela de Dados", style={'textAlign': 'center', 'fontFamily': 'Arial', 'color': '#4EB82F'}),
+        html.Hr(style={'borderColor': f'{cor_lettring}'}),
+        html.H2("Tabela de Dados", style={'textAlign': 'center', 'fontFamily': 'Arial', 'color': f'{cor_lettring}'}),
 
         # Filtro de data
-        html.Div("Selecionar o intervalo de datas da tabela:", style={'fontFamily': 'Arial', 'fontSize': '22px', 'color': '#4EB82F'}),
+        html.Div("Selecionar o intervalo de datas da tabela:", style={'fontFamily': 'Arial', 'fontSize': '22px', 'color': f'{cor_lettring}'}),
         dcc.DatePickerRange(
             id='date-picker-range',
             start_date=data['Date'].min().strftime('%Y-%m-%d'),
@@ -85,7 +94,7 @@ app.layout = html.Div(
                 'fontFamily': 'Arial', 
                 'fontSize': '24px',
                 'backgroundColor': '#2a2a40', 
-                'color': '#4EB82F',
+                'color': f'{cor_lettring}',
                 'padding': '10px', 
                 'marginTop': '20px',
                 'borderRadius': '10px'
@@ -117,8 +126,8 @@ app.layout = html.Div(
             } if col not in ['Date', 'Volume'] else {
                 'name': col,
                 'id': col,
-                'type': 'datetime' if col == 'Date' else 'numeric',  # Tipo para 'Volume'
-                'format': {'specifier': '%Y-%m-%d'} if col == 'Date' else {'specifier': ',.0f'}  # Formato de Volume
+                'type': 'datetime' if col == 'Date' else 'numeric',
+                'format': {'specifier': '%Y-%m-%d'} if col == 'Date' else {'specifier': ',.0f'} 
             } for col in data.columns]
         )
     ]
@@ -137,7 +146,7 @@ def update_ohlc(selected_variable):
             high=data['High'],
             low=data['Low'],
             close=data['Close'],
-            increasing_line_color='#4EB82F',
+            increasing_line_color=f'{cor_lettring}',
             decreasing_line_color='#FF4C4C'
         ))
     elif selected_variable == 'Volume':
@@ -145,7 +154,7 @@ def update_ohlc(selected_variable):
             x=data['Date'],
             y=data['Volume'],
             name='Volume',
-            marker_color='#4EB82F'
+            marker_color=f'{cor_lettring}'
         ))
     else:
         fig = go.Figure(data=go.Scatter(
@@ -153,7 +162,7 @@ def update_ohlc(selected_variable):
             y=data[f'{selected_variable}'],
             mode='lines',
             name=selected_variable,
-            line=dict(color='#4EB82F')
+            line=dict(color=f'{cor_lettring}')
         ))
 
     # Atualizar layout do gráfico para as vars diferentes
