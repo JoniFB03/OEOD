@@ -1,0 +1,13 @@
+Dúvidas:
+
+1- Returns (tópico 3) e estratégia de crossover de EMA;
+2- Modelo de ML como estratégia de trading:
+	- devemos utilizar variáveis preditoras sendo várias métricas como CAGR, RSI ou até mesmo Volume da data do yfinance? Quais utilizar? (1º tópico "Other Notes" enunciado)
+	- Target seria prever os 3 classes (Buy, Sell, Hold) ou problema de regressão? -> os estados para o get_state? 
+
+Depois testamos um algoritmo com esse de ML, pois já temos um com o crossover de EMA e com dois tipos de reward diferentes.
+
+3- Quais métricas de comparação de modelos utilizamos para modelos de RL de "natureza" diferente? Final Balance? 
+
+4- Apresentação data e pode ser presencial?
+ - Relatório pode ser no formato CRISP-DM
