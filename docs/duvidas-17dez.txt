@@ -11,3 +11,24 @@ Depois testamos um algoritmo com esse de ML, pois já temos um com o crossover d
 
 4- Apresentação data e pode ser presencial?
  - Relatório pode ser no formato CRISP-DM
+
+
+####################################################
+
+1. O que mais interessa é a parte final 
+O EMA SLOW está muito abaixo da série -> reduzir o EMA Slow (200 é muito elevado)
+
+2. Podemos usar volume da transação (explicar os preços pela procura); 
+mas o mais importante são o preço dos dias anteriores (desfasamento dos últimos 4 dias por exemplo); 
+Fazer o XGBoost e ajustar os hiperparametros.
+Problema de regressão para prever os preço; 
+Problema de classificação era usar as 3 classes (buy, sell, hold) (indicadires técnicos CARG, RSI)
+
+3.
+Comparar pelo Final balance, o reward e próprio modelo em si.
+Comparar pelo retorno do investimento caso o reward seja diferente
+
+Nota:
+Fazer Random Search, é preferível
+Ver se um modelo de machine learning simples consegue competir com modelos mais robustos e usados
+Nos fim de semana e feriados não há trading
