@@ -7,7 +7,7 @@ mplfinance
 backtesting
 gymnasium
 gym-anytrading
-scikit-learn
+scikit-learn==1.5.2
 plotly
 dash
 dash-bootstrap-components
@@ -18,3 +18,6 @@ dash-table
 dash-daq
 dash-cytoscape
 dash-canvas
+xgboost
+tqdm
+nbformat
