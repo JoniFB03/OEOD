@@ -21,3 +21,5 @@ dash-canvas
 xgboost
 tqdm
 nbformat
+tensorflow
+keras
