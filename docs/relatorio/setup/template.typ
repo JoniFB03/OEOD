@@ -39,15 +39,16 @@
 
   
   
-  set text(
-    font: "Times New Roman",
-    size: fontsize,
-    hyphenate: true,
-    lang: "pt",
-    region: "pt"
-  )
+  // set text(
+  //   font: "Libertinus Serif",
+  //   fallback: false,
+  //   size: fontsize,
+  //   hyphenate: true,
+  //   lang: "pt",
+  //   region: "pt"
+  // )
   set page(
-    numbering: "1",
+    numbering: "1 / 25",
     margin: (left: 12mm, right: 12mm, top: 13mm, bottom: 13mm)
   )
   set par(
@@ -102,7 +103,7 @@
     kind: grid
   ): set figure(kind: image) // n funciona n sei pq
 
-  set list(indent: 0.6cm)
+  set list(indent: 0pt)
   // show figure.where(
   //   kind: tablex
   // ): set figure(kind: table) // n funciona n sei pq
@@ -124,5 +125,3 @@
 #let hline_before(start:none, end:none) = {
   // hlinex(start:start, end:end, stroke:0.5pt, expand:-3pt)
 }
-
-#set heading(numbering: "1.")

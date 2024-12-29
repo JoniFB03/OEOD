@@ -1,6 +1,6 @@
 #import "template.typ": *
 
-#let titulo = "Stock Prices da ..."
+#let titulo = "Análise dos stocks prices da NVIDIA através de estratégias estatísticas e um agente de RL"
 #let subtitulo = "Trabalho de Grupo realizado no âmbito da Unidade Curricular de Otimização de Estratégias Orientada por Dados do 1º ano do Mestrado em Ciência de Dados"
 #let indice= false
 // TODO change to grid
@@ -58,8 +58,8 @@
   v(6.5cm)
 }
 #par(leading: 0.2cm)[
-  #text(16pt)[27 de dezembro 2024]\
-  #text(16pt)[Versão 0.1.0] 
+  #text(16pt)[29 de dezembro 2024]\
+  #text(16pt)[Versão 1.0.0] 
   // 1st number: versão "final" para entregar
   // 2nd number: incremento de conteúdo e tópicos
   // 3rd number: correções de escrita e + info/comments
