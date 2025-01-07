@@ -199,7 +199,7 @@ Onde,
 
   - _N_: é o número de dias úteis no ano (Normalmente, é utilizado o valor de 252 dias úteis).
   - $sigma_d  = sqrt((Sigma^N_(k=1)(R_k - macron(R))^2)/(N - 1))$
-    - *Retorno diário*: $R_k = P_k/P_(k-1) - 1$. O grupo já possui o preço ajustado de "fechamento" para cada dia. Assim, basta calcular a taxa de variação entre esses valores, ou seja, `data['Adj Close'].pct_change()`.
+    - *Retorno diário*: $R_k = P_k/P_(k-1) - 1$. O grupo já possui o preço ajustado de "fecho" para cada dia. Assim, basta calcular a taxa de variação entre esses valores, ou seja, `data['Adj Close'].pct_change()`.f
     - *Média dos Retornos*: $macron(R) = 1/N Sigma^N_(k=1) R_k$. Esta fórmula consiste em fazer uma média dos *$R_k$*
 
 A volatilidade foi mais alta em 2022 (64,21%), indicando que a ação teve uma maior variação nos preços durante esse ano.
@@ -304,6 +304,7 @@ $<SharpeRatio>
 
   - *`Taxa Livre de Risco`* *$: (1 + 0.02)^(1/360)-1$*
     - A #link("https://www.investopedia.com/articles/financial-theory/08/risk-free-rate-return.asp")[`Taxa Livre de Risco`] é o retorno que um investidor pode esperar de um investimento considerado sem risco de crédito, como os títulos do governo de curto prazo. Esses investimentos são vistos como seguros, pois o risco de inadimplência é mínimo. A taxa livre de risco serve como base para comparar outros investimentos, pois oferece um retorno sem risco, e qualquer ativo mais arriscado deve gerar um retorno maior para compensar o risco adicional.
+
 
 Um valor de 0.091 é consideravelmente baixo, o que sugere que o retorno extra do investimento não é suficiente para compensar o nível de risco envolvido. Em termos práticos, esse valor implica que o risco assumido não é adequadamente recompensado com o retorno gerado. O `Sharpe Ratio` idealmente deveria ser superior a 1, sendo que um valor abaixo de 1 pode ser visto como um sinal de que o investimento não é suficientemente atraente para justificar o risco.
 
@@ -448,13 +449,13 @@ Na escolha do modelo de _machine learning_, o grupo decidiu implementar um model
 
 No pré-processamento dos dados, foram eliminadas as linhas que continham valores nulos, a fim de evitar que esses dados faltantes prejudicassem o desempenho do modelo. Além disso, a variável `close` foi normalizada utilizando o *MinMaxScaler*, que escala os valores entre 0 e 1, garantindo que as variáveis estejam no mesmo intervalo e, assim, facilitando a convergência do modelo durante o treino.
 
-Para a divisão dos dados em treino e teste, optou-se por uma distribuição de *80%* para treino e *20%* para teste. As variáveis preditivas, que incluem os *`lags`*, *`volatilidade`* e *`momentum`*, foram armazenadas na variável *`X`*, enquanto o preço da variável *`Close`* foi armazenado em *`Y`*, que representa o alvo da previsão.
+Para a divisão dos dados em treino e teste, optou-se por uma distribuição de *80%* para treino e *20%* para teste. As variáveis preditivas escolhidas foram: *`lags (4x)`*, *`volatilidade`* e *`momentum`*. A _target_ escolhida foi a variável *`Close`*, sendo esta a que tinhamos como objetivo prever.
 
 Para a criação do modelo de *rede neuronal LSTM*, foram definidas três camadas com as seguintes características:
 
 - *`Camada de Entrada (LSTM)`*: Composta por *64 unidades* e função de ativação _ReLU_ (Rectified Linear Unit), uma camada recorrente que permite capturar dependências temporais nos dados, essencial para séries temporais.
 - *`Camada Oculta`*: Com *32 unidades*, também utilizando a função de ativação _ReLU_, o que permite à rede aprender representações mais complexas dos dados.
-- *`Camada de Saída`*: Uma única unidade que tem como objetivo prever o valor contínuo do preço de fechamento da ação.
+- *`Camada de Saída`*: Uma única unidade que tem como objetivo prever o valor contínuo do preço de fecho da ação. 
 
 A rede foi compilada utilizando o #link("https://pt.eitca.org/intelig%C3%AAncia-artificial/eitc-ai-dltf-aprendizado-profundo-com-tensorflow/fluxo-tensor/modelo-de-rede-neural/revis%C3%A3o-de-exame-modelo-de-rede-neural/como-o-otimizador-adam-otimiza-o-modelo-de-rede-neural/")[*Otimizador Adam*], que ajusta os pesos de maneira eficiente durante o treino, e a #link("https://www.ibm.com/br-pt/think/topics/loss-function")[*Função de perda MSE (Erro Quadrático Médio)*], que mede a diferença entre as previsões do modelo e os valores reais, visando minimizar esse erro.
 
@@ -630,7 +631,7 @@ A função retorna um estado, que é um número inteiro representando a combina�
 - *$italic("Gamma") (gamma)$* -> corresponde ao fator de desconto, que controla a importância das recompensas futuras em relação às recompensas imediatas. Iniciámos o *_baseline model_* com um valor de 0.95, que será "refinado" na @4.4tuningmodelos.
 - *$italic("Epsilon") (epsilon)$* -> é a taxa de exploração, inicializada como 1.0 (irá passar pelo mesmo processo de ajuste na @4.4tuningmodelos). Por outras palavras, no início, o agente explorará aleatoriamente as ações disponíveis, sem confiar apenas na `Q-table`, daí o valor de 1. O valor de `epsilon` diminui ao longo do tempo, à medida que o agente se torna mais confiante nas suas decisões, o que é controlado pela taxa de `epsilon_decay`, iniciada como 0.995, que serve para reduzir gradualmente a taxa de exploração, permitindo que o agente explore no início e, aos poucos, foque em estratégias aprendidas: *`exploit`*.
 
-- *$italic("reward") (r_t)$* -> a _reward_ corresponde ao desempenho que do agente ao longo do tempo. Foram utilizados diferentes tipos de _reward_ diferentes:
+- *$italic("reward") (r_t)$* -> a _reward_ corresponde ao desempenho do agente ao longo do tempo. Foram utilizados diferentes tipos de _reward_ diferentes:
 
   - *1º caso*: _reward_ só é calculada no momento da venda e reflete no lucro ou prejuízo, com base no balanço final e inicial da transação;
   - *2º caso*: _reward_ é calculada a partir do Sharpe Ratio @SharpeRatio, onde o objetivo é maximizar os lucros ao mesmo tempo que o risco é minimizado.
@@ -940,7 +941,7 @@ Com base nas nossas análises e resultados, as estatísticas ( @3.3stats ) demon
 #line(length: 100%)
    - Este modelo foi consideravelmente mais trabalhoso do que o de _Machine Learning_. Inicialmente, foi necessário definir uma estratégia, o que exigiu um estudo detalhado sobre o comportamento das ações da _NVIDIA_. Após esta análise, o grupo concluiu que a melhor abordagem seria utilizar a EMA @CMMEFormula, dado o crescimento exponencial das ações da empresa nos últimos meses. Na @tabcrossoverEMA, são apresentados vários valores de `span` aplicados na estratégia de _crossover_, sendo fundamental realizar múltiplos testes para maximizar o *CumReturn* @CumReturnFormula. Após diversas iterações, determinou-se que os parâmetros ideais eram: EMA _fast_ de 50 e EMA _slow_ de 140.
 
-   - Com a estratégia definida, passámos finalmente para a criação do modelo de _reinforcement learning_. Para tal, estabelecemos algumas bases, como o número de ações possíveis (*Buy*, *Sell*, *Hold*), e implementámos e adaptámos a estratégia mencionada anteriormente. De seguida, optámos pelo algoritmo de #link("https://www.geeksforgeeks.org/q-learning-in-python/")[_Q-learning_], tendo criado 2 diferentes: o primeiro com *reward* do balanço atual - inicial, e o segundo com *reward* do *sharpe ratio*..
+   - Com a estratégia definida, passámos finalmente para a criação do modelo de _reinforcement learning_. Para tal, estabelecemos algumas bases, como o número de ações possíveis (*Buy*, *Sell*, *Hold*), e implementámos e adaptámos a estratégia mencionada anteriormente. De seguida, optámos pelo algoritmo de #link("https://www.geeksforgeeks.org/q-learning-in-python/")[_Q-learning_], tendo criado 2 diferentes: o primeiro com *reward* do balanço atual - inicial, e o segundo com *reward* do *sharpe ratio*.
    
    - A seguir, chegámos à fase mais desafiante deste trabalho: a definição dos hiperparâmetros. Para tal, foram definidas 3 modelos:
    
@@ -1037,7 +1038,7 @@ image("images/ema20_140.png", width: 85%),
 #align(center)[
   #figure(
 image("images/BaseLineModelLRZero.png", width: 85%),
-  caption: []
+  caption: [Erro do BackTesting]
 ) <Erro>
 ] 
 
