@@ -59,7 +59,7 @@
 }
 #par(leading: 0.2cm)[
   #text(16pt)[29 de dezembro 2024]\
-  #text(16pt)[Versão 1.0.1] 
+  #text(16pt)[Versão 1.0.2] 
   // 1st number: versão "final" para entregar
   // 2nd number: incremento de conteúdo e tópicos
   // 3rd number: correções de escrita e + info/comments

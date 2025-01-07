@@ -599,7 +599,7 @@ image("images/BackTestingTimeMLClass.png", width: 100%),
 
 Ao analisar a @BackTestingTimeMLClass, é claro que o nosso _budget_ seguiu uma evolução predominantemente linear, com alguns picos de aumento e decréscimo, especialmente no final. Contudo, é importante refletir sobre essas visualizações, pois as ações da _NVIDIA_ apresentaram uma tendência constante de valorização, o que facilita a geração de lucro pelo modelo ao investir nessas ações. Para uma análise mais precisa, é necessário combinar essas observações com métricas previamente discutidas, como a @BackTestingMLClassCode.
 
-Um exemplo relevante é o _DrawDown_ @MDD, que indica as perdas durante o período de teste. Ao examinar os valores, é evidente que houve períodos em que ocorreram perdas significativas, o que sugere que, em algumas situações, este modelo pode não ser o mais adequado. Tendo isso em mente, na próxima @4.2RLmodels, iremos explorar uma técnica que acreditamos ser mais apropriada para este tipo de problema: #link("https://www.geeksforgeeks.org/what-is-reinforcement-learning/")[*Reinforcement Learning*].
+Um exemplo relevante é o _DrawDown_ @MDD, que indica as perdas durante o período de teste. Ao examinar os valores, é evidente que houve períodos em que ocorreram perdas significativas, o que sugere que, em algumas situações, este modelo pode não ser o mais adequado. Tendo isso em mente, na próxima @4.2RLmodels, iremos explorar uma técnica que acreditamos ser mais apropriada para este tipo de problema: #link("https://www.geeksforgeeks.org/what-is-reinforcement-learning/")[*Reinforcement Learning*]. 
 
 == Algoritmo de _Reinforcement Learning_<4.2RLmodels>
 

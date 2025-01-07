@@ -48,7 +48,7 @@
   //   region: "pt"
   // )
   set page(
-    numbering: "1 / 25",
+    numbering: "1 / 24",
     margin: (left: 12mm, right: 12mm, top: 13mm, bottom: 13mm)
   )
   set par(
