@@ -173,7 +173,9 @@ def update_ohlc(selected_variable):
         xaxis_rangeslider_visible=(selected_variable == 'OHLC'),
         plot_bgcolor='#1e1e2f',
         paper_bgcolor='#1e1e2f',
-        font=dict(color='#f5f5f5')
+        font=dict(color='#f5f5f5'),
+        height=1200,  # Altura do gráfico
+        width=2200   # Largura do gráfico
     )
     return fig
 
